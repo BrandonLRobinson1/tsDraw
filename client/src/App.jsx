@@ -19,8 +19,8 @@ const App = () => (
         <Link className="welcome-button" to="/signup">
           Log In
         </Link>
-        <Link className="welcome-button" to="/signup">
-          Sign Up
+        <Link className="welcome-button" to="/register">
+          Register
         </Link>
       </div>
     </div>

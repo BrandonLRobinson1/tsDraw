@@ -14,7 +14,7 @@ root.render(
       {/* need 404 pagr */}
       <Route path="/" element={<App />} />
       <Route path="/login" element={<div>hi</div>} />
-      <Route path="/signup" element={<SignUp />} />
+      <Route path="/register" element={<SignUp />} />
     </Routes>
   </BrowserRouter>
 );
