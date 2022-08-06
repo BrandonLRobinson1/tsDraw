@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Routes>
-      {/* need 404 pagr */}
+      {/* TODO: need 404 page */}
       <Route path="/" element={<App />} />
       <Route path="/login" element={<div>hi</div>} />
       <Route path="/register" element={<SignUp />} />

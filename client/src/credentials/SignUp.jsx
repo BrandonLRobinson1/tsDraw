@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  solid,
-  // regular,
-  // brands,
-} from "@fortawesome/fontawesome-svg-core/import.macro";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
 
+// TODO: rename and move
+const apiRoute = "http://localhost:3100";
 const SignUp = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -34,7 +36,46 @@ const SignUp = () => {
     resolver: yupResolver(schema),
   });
 
-  const signUpSumbit = () => console.log("gh");
+  const signUpSumbit = async (userCredentials) => {
+    setIsLoading(true);
+    try {
+      const { email, password } = userCredentials;
+
+      const body = JSON.stringify({ email, password });
+
+      const config = {
+        headers: {
+          "Content-Type": "application/JSON",
+        },
+      };
+
+      const data = await axios.post(`${apiRoute}/register`, body, config);
+      const { status } = data;
+
+      // console.log("status: ", status);
+      // console.log("data: ", data);
+      // setIsLoading(false);
+    } catch (e) {
+      const { response } = e;
+      setIsLoading(false);
+      if (response.status === 500) {
+        toast.error("Cannot reach server");
+      }
+      toast.error(response.data.message);
+    }
+  };
+
+  if (isLoading)
+    // if (true)
+    return (
+      <div className="app-container">
+        <FontAwesomeIcon
+          className="App-logo"
+          size="sm"
+          icon={solid("spinner")}
+        />
+      </div>
+    );
 
   return (
     <div className="app-container">
@@ -50,7 +91,8 @@ const SignUp = () => {
             <Controller
               name="email"
               control={control}
-              defaultValue=""
+              // defaultValue=""
+              defaultValue="fakeEmail@gmail.com"
               render={({ field: { onChange, value } }) => (
                 <input
                   onChange={(text) => onChange(text)}
@@ -68,7 +110,8 @@ const SignUp = () => {
             <Controller
               name="password"
               control={control}
-              defaultValue=""
+              // defaultValue=""
+              defaultValue="Brandonr82!"
               render={({ field: { onChange, value } }) => (
                 <input
                   onChange={(text) => onChange(text)}
@@ -91,6 +134,15 @@ const SignUp = () => {
           <div className="help-text">Forgot your password?</div>
         </div>
       </form>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick
+        draggable
+        pauseOnHover
+        limit={1}
+      />
     </div>
   );
 };
