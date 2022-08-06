@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { ToastContainer, toast } from "react-toastify";
+import { AuthContext } from "../lib/context/AuthContext";
+
 import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
 
 // TODO: rename and move
-const apiRoute = "http://localhost:3100";
+const baseUrl = "http://localhost:3100";
 const LogIn = () => {
+  const navigate = useNavigate();
+  const { setIsAuthenticated } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const schema = yup.object().shape({
     email: yup
@@ -43,13 +48,23 @@ const LogIn = () => {
         },
       };
 
-      const response = await axios.post(`${apiRoute}/login`, body, config);
+      const response = await axios.post(`${baseUrl}/login`, body, config);
 
-      console.log("accessToken: ", response.data.accessToken);
+      const token = response.data.accessToken;
+
+      if (!token) {
+        toast.error("Uh-oh. Something went wrong!");
+      }
+
+      localStorage.setItem("tsToken", JSON.stringify(token));
+
+      setIsAuthenticated(true);
+
+      console.log("accessToken: ", token);
 
       setIsLoading(false);
 
-      // navigate("/main");
+      navigate("/main");
     } catch (e) {
       const { response } = e;
       setIsLoading(false);

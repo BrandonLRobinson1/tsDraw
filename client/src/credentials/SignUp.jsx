@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
 
 // TODO: rename and move
-const apiRoute = "http://localhost:3100";
+const baseUrl = "http://localhost:3100";
 const SignUp = () => {
   const navigate = useNavigate();
 
@@ -53,7 +53,7 @@ const SignUp = () => {
         },
       };
 
-      const data = await axios.post(`${apiRoute}/register`, body, config);
+      const data = await axios.post(`${baseUrl}/register`, body, config);
       console.log("data: ", data);
 
       setIsLoading(false);

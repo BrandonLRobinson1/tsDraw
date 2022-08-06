@@ -16,7 +16,7 @@ const App = () => (
         <p>Presented by Brandon Robinson</p>
       </div>
       <div className="welcome-button-container">
-        <Link className="welcome-button" to="/signup">
+        <Link className="welcome-button" to="/login">
           Log In
         </Link>
         <Link className="welcome-button" to="/register">
