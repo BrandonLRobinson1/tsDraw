@@ -1,3 +1,7 @@
+:root {
+  --main-border-radius: 10px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -34,7 +38,7 @@
   flex-direction: column;
   height: 600px;
   width: 450px;
-  border-radius: 10px;
+  border-radius: var(--main-border-radius);
   background-color: greenyellow;
 }
 
@@ -73,12 +77,15 @@
   color: white;
   text-decoration: none;
   margin: 0px 5px 10px 5px;
-  border-radius: 10px;
+  border-radius: var(--main-border-radius);
   font-size: calc(5px + 2vmin); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 95%;
   height: 50px;
   margin: 0px 5px 10px 5px;
-  border-radius: 10px;
+  border-radius: var(--main-border-radius);
   background-color: red;
   text-align: center;
   color: white;

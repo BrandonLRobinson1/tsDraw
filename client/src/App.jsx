@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -14,12 +16,12 @@ const App = () => (
         <p>Presented by Brandon Robinson</p>
       </div>
       <div className="welcome-button-container">
-        <button className="welcome-button" type="button">
+        <Link className="welcome-button" to="/signup">
           Log In
-        </button>
-        <button className="welcome-button" type="button">
+        </Link>
+        <Link className="welcome-button" to="/signup">
           Sign Up
-        </button>
+        </Link>
       </div>
     </div>
   </div>
