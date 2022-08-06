@@ -2,6 +2,12 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  solid,
+  // regular,
+  // brands,
+} from "@fortawesome/fontawesome-svg-core/import.macro";
 import "./index.css";
 
 const SignUp = () => {
@@ -31,38 +37,59 @@ const SignUp = () => {
   const signUpSumbit = () => console.log("gh");
 
   return (
-    <div className="container">
-      <form
-        className="credentials-container"
-        onSubmit={handleSubmit(signUpSumbit)}
-      >
-        <Controller
-          name="email"
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <input
-              onChange={(text) => onChange(text)}
-              value={value}
-              placeholder="Email Address"
-              className="credentials-input-body-section-input"
+    <div className="app-container">
+      <form className="credentials-box" onSubmit={handleSubmit(signUpSumbit)}>
+        <div className="credentials-header">
+          <div className="credentials-header-icon">
+            <FontAwesomeIcon size="2x" icon={solid("user-secret")} />
+          </div>
+          <div className="credentials-header-title">Sign Up</div>
+        </div>
+        <div className="credentials-input-body">
+          <div className="credentials-input-body-section">
+            <Controller
+              name="email"
+              control={control}
+              defaultValue=""
+              render={({ field: { onChange, value } }) => (
+                <input
+                  onChange={(text) => onChange(text)}
+                  value={value}
+                  placeholder="Email Address"
+                  className="credentials-input"
+                />
+              )}
             />
-          )}
-        />
-        {errors.email ? errors.email.message : <span>&nbsp;</span>}
-
-        <Controller
-          name="password"
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <input
-              onChange={(text) => onChange(text)}
-              value={value}
-              placeholder="Password"
-              className="credentials-input-body-section-input"
+            <div className="error-text-email">
+              {errors.email ? errors.email.message : <span>&nbsp;</span>}
+            </div>
+          </div>
+          <div className="credentials-input-body-section">
+            <Controller
+              name="password"
+              control={control}
+              defaultValue=""
+              render={({ field: { onChange, value } }) => (
+                <input
+                  onChange={(text) => onChange(text)}
+                  value={value}
+                  type="password"
+                  placeholder="Password"
+                  className="credentials-input"
+                />
+              )}
             />
-          )}
-        />
-        {errors.password ? errors.password.message : <span>&nbsp;</span>}
+            <div className="error-text-pw">
+              {errors.password ? errors.password.message : <span>&nbsp;</span>}
+            </div>
+          </div>
+        </div>
+        <div className="credentials-button-section">
+          <button className="credentials-button" type="submit">
+            Sumbit
+          </button>
+          <div className="help-text">Forgot your password?</div>
+        </div>
       </form>
     </div>
   );

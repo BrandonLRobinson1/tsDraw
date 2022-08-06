@@ -5,7 +5,7 @@ import logo from "./logo.svg";
 import "./App.css";
 
 const App = () => (
-  <div className="welcome-container">
+  <div className="app-container">
     <div className="welcome-box">
       <div className="welcome-dialogue-container">
         <img src={logo} className="App-logo" alt="logo" />
