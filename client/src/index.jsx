@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
-import SignUp from "./credentials/SignUp";
-import LogIn from "./credentials/LogIn";
+import SignUp from "./pages/credentials/SignUp";
+import LogIn from "./pages/credentials/LogIn";
+import Main from "./pages/main";
 import PrivateRoute from "./PrivateRoute";
 import { AuthProvider } from "./lib/context/AuthContext";
 import "./index.css";
@@ -19,9 +20,12 @@ root.render(
         <Route path="/" element={<App />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/register" element={<SignUp />} />
-        <Route element={<PrivateRoute />}>
+
+        <Route path="/main" element={<Main />} />
+
+        {/* <Route element={<PrivateRoute />}>
           <Route path="/main" element={<div>yerr</div>} />
-        </Route>
+        </Route> */}
         <Route path="*" element={<div>404 page</div>} />
       </Routes>
     </AuthProvider>
