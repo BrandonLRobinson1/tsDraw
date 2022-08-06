@@ -7,8 +7,19 @@
   pointer-events: none;
 }
 
+.spinner {
+  height: 10vmin;
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .spinner {
     animation: App-logo-spin infinite 20s linear;
   }
 }
@@ -22,6 +33,7 @@
   }
 }
 
+
 .app-container {
   background-color: grey;
   min-height: 100vh;
@@ -29,7 +41,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  /* TODO: adjust font */
+  /* font-size: calc(10px + 2vmin); */
+  font-size: calc(4px + 2vmin);
   color: white;
 }
 
@@ -66,19 +80,6 @@
 }
 
 .welcome-button {
-  /* flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 95%;
-  padding: 10px;
-  background-color: red;
-  text-align: center;
-  color: white;
-  text-decoration: none;
-  margin: 0px 5px 10px 5px;
-  border-radius: var(--main-border-radius);
-  font-size: calc(5px + 2vmin); */
   display: flex;
   justify-content: center;
   align-items: center;

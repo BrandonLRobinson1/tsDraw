@@ -11,13 +11,13 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  // drawing: {
-  //   drawingData: String,
-  //   private: Boolean,
-  //   time: String,
-  //   required: false
-  // }
-  // refreshToken: String,
+  drawing: {
+    drawingData: String,
+    private: Boolean,
+    time: String,
+    required: false,
+  },
+  refreshToken: String,
 });
 
 module.exports = mongoose.model("User", userSchema);

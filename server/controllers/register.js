@@ -1,5 +1,5 @@
+const bcrypt = require("bcrypt");
 const User = require("../models/UserModel");
-// const bcrypt = require('bcrypt');
 
 const handleNewUser = async (req, res) => {
   try {
@@ -11,14 +11,15 @@ const handleNewUser = async (req, res) => {
         .json({ message: "Email and password are required." });
 
     const duplicate = await User.findOne({ email }).exec();
+
     if (duplicate)
       return res.status(409).json({ message: "This email is being used" });
 
-    // // const hashedPwd = await bcrypt.hash(pwd, 10);
+    const hashedPwd = await bcrypt.hash(password, 10);
 
     const result = await User.create({
       email,
-      password,
+      password: hashedPwd,
     });
 
     console.log(result);

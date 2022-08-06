@@ -66,11 +66,10 @@ const SignUp = () => {
   };
 
   if (isLoading)
-    // if (true)
     return (
       <div className="app-container">
         <FontAwesomeIcon
-          className="App-logo"
+          className="spinner"
           size="sm"
           icon={solid("spinner")}
         />
@@ -141,6 +140,7 @@ const SignUp = () => {
         closeOnClick
         draggable
         pauseOnHover
+        pauseOnFocusLoss
         limit={1}
       />
     </div>
