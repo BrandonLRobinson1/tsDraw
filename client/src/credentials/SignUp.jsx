@@ -3,6 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,7 +13,10 @@ import "./index.css";
 // TODO: rename and move
 const apiRoute = "http://localhost:3100";
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const [isLoading, setIsLoading] = useState(false);
+
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -50,14 +54,18 @@ const SignUp = () => {
       };
 
       const data = await axios.post(`${apiRoute}/register`, body, config);
-      const { status } = data;
+      console.log("data: ", data);
 
-      // console.log("status: ", status);
-      // console.log("data: ", data);
-      // setIsLoading(false);
+      setIsLoading(false);
+
+      toast.success("Lorem ipsum dolor");
+
+      navigate("/login");
     } catch (e) {
       const { response } = e;
+
       setIsLoading(false);
+
       if (response.status === 500) {
         toast.error("Cannot reach server");
       }

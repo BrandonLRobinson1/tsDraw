@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 // const path = require("path");
 const register = require("./controllers/register");
+const login = require("./controllers/logIn");
 
 const PORT = process.env.PORT || 3100;
 const connectDB = require("./config/database");
@@ -28,6 +29,8 @@ app.use(express.json());
 // app.use(express.static("public"));
 
 app.use("/register", register);
+
+app.use("/login", login);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

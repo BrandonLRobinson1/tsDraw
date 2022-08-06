@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import SignUp from "./credentials/SignUp";
+import LogIn from "./credentials/LogIn";
 import "./index.css";
 
 import reportWebVitals from "./reportWebVitals";
@@ -13,7 +14,7 @@ root.render(
     <Routes>
       {/* TODO: need 404 page */}
       <Route path="/" element={<App />} />
-      <Route path="/login" element={<div>hi</div>} />
+      <Route path="/login" element={<LogIn />} />
       <Route path="/register" element={<SignUp />} />
     </Routes>
   </BrowserRouter>
