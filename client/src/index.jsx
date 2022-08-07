@@ -5,6 +5,7 @@ import App from "./App";
 import SignUp from "./pages/credentials/SignUp";
 import LogIn from "./pages/credentials/LogIn";
 import Main from "./pages/main";
+import Create from "./pages/create";
 import PrivateRoute from "./PrivateRoute";
 import { AuthProvider } from "./lib/context/AuthContext";
 import "./index.css";
@@ -22,9 +23,11 @@ root.render(
         <Route path="/register" element={<SignUp />} />
 
         <Route path="/main" element={<Main />} />
+        <Route path="/create" element={<Create />} />
 
         {/* <Route element={<PrivateRoute />}>
-          <Route path="/main" element={<div>yerr</div>} />
+          <Route path="/main" element={<Main />} />
+          <Route path="/create" element={<Create />} />
         </Route> */}
         <Route path="*" element={<div>404 page</div>} />
       </Routes>

@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import MainNav from "../navBar/MainNav";
+import Loading from "../common/Loading";
 import "./index.css";
 
 const Main = () => {
   // TODO: make a reusable
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState(null);
   const [filterByGlobal, setFilterByGlobal] = useState(false);
 
   useEffect(() => {
     // axios getDrawings
     setUserData([1, 1, 1, 1, 1]);
+    setIsLoading(false);
   }, []);
 
   let displayData = userData;
@@ -27,6 +29,8 @@ const Main = () => {
 
   const handleGlobalDrawingClick = () =>
     !filterByGlobal ? setFilterByGlobal(true) : null;
+
+  if (isLoading) return <Loading />;
 
   return (
     <>

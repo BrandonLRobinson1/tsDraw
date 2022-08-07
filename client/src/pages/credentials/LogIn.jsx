@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../../lib/context/AuthContext";
+import Loading from "../common/Loading";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
@@ -75,16 +76,7 @@ const LogIn = () => {
     }
   };
 
-  if (isLoading)
-    return (
-      <div className="app-container">
-        <FontAwesomeIcon
-          className="spinner"
-          size="sm"
-          icon={solid("spinner")}
-        />
-      </div>
-    );
+  if (isLoading) return <Loading />;
 
   return (
     <div className="app-container">

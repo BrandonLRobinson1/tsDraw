@@ -10,7 +10,7 @@ const MainNav = () => (
   <nav className="navbar">
     <div className="navbar-logo-container"><FontAwesomeIcon size="lg" icon={solid("user-secret")} /></div>
     <div className="navbar-content-container">
-      <Link to="/" className='navbar-button'>Create</Link>
+      <Link to="/create" className='navbar-button'>Create</Link>
     </div>
   </nav>
 );
