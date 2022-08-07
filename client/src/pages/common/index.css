@@ -1,0 +1,41 @@
+.dropdown-label {
+  font-size: 14px;
+  padding-right: 5px;
+}
+
+.select-dropdown {
+  padding: 8px 12px;
+  color: #333333;
+  background-color: #eeeeee;
+  border: 1px solid #dddddd;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.select-dropdown:focus,
+.select-dropdown:hover {
+  outline: none;
+  border: 1px solid #bbbbbb;
+}
+
+
+@media only screen and (max-width: 450px) {
+  .app-container {
+    font-size: calc(10px + 2vmin);
+  }
+
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+
+  .welcome-box {
+    height: 450px;
+    width: 375px;
+  }
+
+  .welcome-button {
+    font-size: 14px;
+    height: 45px;
+  }
+}

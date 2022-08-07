@@ -1,0 +1,17 @@
+.canvas-control-container {
+  height: 65px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.canvas-dropdown {
+  padding: 15px;
+}
+
+@media only screen and (max-width: 450px) {
+/* going to display none */
+}
+
+

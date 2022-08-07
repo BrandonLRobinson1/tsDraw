@@ -17,7 +17,7 @@ import "./index.css";
 const baseUrl = "http://localhost:3100";
 const LogIn = () => {
   const navigate = useNavigate();
-  const { setIsAuthenticated } = useContext(AuthContext);
+  const { setIsAuthenticated, setEmail } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const schema = yup.object().shape({
     email: yup
@@ -60,6 +60,8 @@ const LogIn = () => {
       localStorage.setItem("tsToken", JSON.stringify(token));
 
       setIsAuthenticated(true);
+
+      setEmail(email);
 
       console.log("accessToken: ", token);
 
