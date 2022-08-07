@@ -54,13 +54,15 @@ const LogIn = () => {
 
       const token = response.data.accessToken;
 
+      localStorage.setItem("tsToken", JSON.stringify(token));
+
       if (!token) {
         toast.error("Uh-oh. Something went wrong!");
       }
 
       setIsAuthenticated(true);
 
-      setEmail(email);
+      setEmail(email); // <------- 🔥 Return to this
 
       setIsLoading(false);
 

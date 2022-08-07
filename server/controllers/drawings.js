@@ -2,6 +2,7 @@ const Drawing = require("../models/DrawingModel");
 
 const createNewDrawing = async (req, res) => {
   try {
+
     const { email, url, viewType, createTime, creationDate, timeToCreate } =
       req.body;
 
@@ -30,6 +31,7 @@ const createNewDrawing = async (req, res) => {
       return res
         .status(400)
         .json({ message: "Info does not contain time to create" });
+
 
     const duplicate = await Drawing.findOne({ url }).exec();
 

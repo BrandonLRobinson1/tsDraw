@@ -1,18 +1,29 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import Dropdown from "../common/Dropdown";
 import NavCreate from "../navBar/NavCreate";
+import { AuthContext } from "../../lib/context/AuthContext";
+import Loading from "../common/Loading";
 import {
   colorsOptions,
   brushSize,
   strokeSize,
   brushType,
-  viewType,
+  viewTypes,
 } from "./dropdownValues";
 import "./index.css";
 
+// TODO: rename and move
+const baseUrl = "http://localhost:3100";
+
 const Create = () => {
+  const navigate = useNavigate();
+  const { email } = useContext(AuthContext);
   const [currentlyDrawing, setCurrentlyDrawing] = useState(false);
-  const [save, setSave] = useState(false);
+  // const [save, setSave] = useState(false);
+  const [viewType, setViewType] = useState("public");
   const [isLoading, setIsLoading] = useState(false);
   const [eraserActive, setEraserActive] = useState(false);
   const [prevCtx, setPrevCtx] = useState(false);
@@ -134,23 +145,65 @@ const Create = () => {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  const saveDrawing = () => {
-    const endTime = new Date();
-    const canvasSave = document.getElementById("canvas");
-    const d = canvasSave.toDataURL("image/png");
-    console.log("d", d);
+  const saveDrawing = async () => {
+    setIsLoading(true);
+    try {
+      const endTime = new Date();
+      const canvasSave = document.getElementById("canvas");
+      const drawingUrl = canvasSave.toDataURL("image/png");
 
-    const miliseconds = endTime - beginningTime;
-    const elapsedTime = millisToMinutesAndSeconds(miliseconds);
-    // alst need this for creation time -> beginningTime
-    console.log("alst need this for creation time ", beginningTime);
-    console.log("elapsedTime", elapsedTime);
-    console.log("Saved!");
+      const miliseconds = endTime - beginningTime;
+      const elapsedTime = millisToMinutesAndSeconds(miliseconds);
+      // alst need this for creation time -> beginningTime
 
-    const readableDate = Date(beginningTime).split(" ");
-    const memberSince = `${readableDate[1]} ${readableDate[2]} ${readableDate[3]}`;
-    const timeCreate = readableDate[4];
-    console.log("memberSince", memberSince, timeCreate);
+      const readableDate = Date(beginningTime).split(" ");
+      const dateCreated = `${readableDate[1]} ${readableDate[2]} ${readableDate[3]}`;
+      const timeCreate = readableDate[4];
+      console.log("memberSince", dateCreated, timeCreate);
+
+      const token = JSON.parse(localStorage.getItem("tsToken"));
+
+      const axiosBody = {
+        // email,
+        email: "fakeEmail@gmail.comb",
+        url: drawingUrl,
+        viewType,
+        createTime: timeCreate,
+        creationDate: dateCreated,
+        timeToCreate: elapsedTime,
+      };
+
+      console.log("???", axiosBody);
+
+      const body = JSON.stringify(axiosBody);
+
+      const config = {
+        headers: {
+          "Content-Type": "application/JSON",
+          authorization: `Bearer ${token}`,
+        },
+        // withCredentials: "include",
+      };
+
+      const response = await axios.post(`${baseUrl}/create`, body, config);
+
+      console.log("????", response);
+
+      setIsLoading(false);
+
+      toast.success("Lorem ipsum dolor");
+
+      // navigate("/main");
+    } catch (e) {
+      const { response } = e;
+
+      setIsLoading(false);
+
+      if (response.status === 500) {
+        toast.error("Cannot reach server");
+      }
+      toast.error(response.data.message);
+    }
   };
 
   console.log("ctxRef", ctxRef);
@@ -165,6 +218,8 @@ const Create = () => {
   //   ctx.lineWidth = 10;
   //   ctxRef.current = ctx;
   // };
+
+  if (isLoading) return <Loading />;
 
   return (
     <div>
@@ -213,10 +268,10 @@ const Create = () => {
         <div className="canvas-dropdown">
           <Dropdown
             label="Public/Private"
-            value="label"
-            defaultValue={viewType[0]}
-            options={viewType}
-            onChange={(e) => console.log("hi")}
+            value={viewType}
+            defaultValue={viewTypes[0]}
+            options={viewTypes}
+            onChange={(e) => setViewType(e.target.value)}
           />
         </div>
       </div>
@@ -226,6 +281,16 @@ const Create = () => {
         onMouseUp={endDrawing}
         onMouseMove={draw}
         ref={canvasRef}
+      />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick
+        draggable
+        pauseOnHover
+        pauseOnFocusLoss
+        limit={1}
       />
     </div>
   );

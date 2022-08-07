@@ -8,7 +8,7 @@ const drawingSchema = new Schema({
     required: true,
   },
   viewType: {
-    type: Boolean,
+    type: String,
     required: true,
   },
   createTime: {

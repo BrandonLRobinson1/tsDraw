@@ -45,7 +45,7 @@ export const brushType = [
   // { value: "square", label: "Square" },
 ];
 
-export const viewType = [
+export const viewTypes = [
   { value: "public", label: "Public" },
   { value: "private", label: "Private" },
 ];
