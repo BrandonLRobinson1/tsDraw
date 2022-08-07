@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 20vmin;
   pointer-events: none;
 }
 
@@ -97,6 +97,15 @@
 }
 
 @media only screen and (max-width: 450px) {
+  .app-container {
+    font-size: calc(10px + 2vmin);
+  }
+
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+
   .welcome-box {
     height: 450px;
     width: 375px;

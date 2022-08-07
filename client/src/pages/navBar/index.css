@@ -1,0 +1,42 @@
+.navbar {
+  background: #333;
+  height: 5.5rem;
+  width: 100%;
+  display: flex;
+}
+
+.navbar svg {
+  font-size: 40px;
+}
+
+.navbar-logo-container {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 15px;
+  align-items: center;
+}
+
+.navbar-content-container {
+  flex: 9;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navbar-button {
+  /* height: 50%; */
+  height: 45px;
+  margin: 15px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--main-border-radius);
+  text-decoration: none;
+  font-weight: 700;
+  background-color: pink;
+  color: white;
+}
+
+@media only screen and (max-width: 450px) {}
