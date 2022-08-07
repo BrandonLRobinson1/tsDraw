@@ -47,6 +47,7 @@ const LogIn = () => {
         headers: {
           "Content-Type": "application/JSON",
         },
+        withCredentials: "include",
       };
 
       const response = await axios.post(`${baseUrl}/login`, body, config);
@@ -57,13 +58,9 @@ const LogIn = () => {
         toast.error("Uh-oh. Something went wrong!");
       }
 
-      localStorage.setItem("tsToken", JSON.stringify(token));
-
       setIsAuthenticated(true);
 
       setEmail(email);
-
-      console.log("accessToken: ", token);
 
       setIsLoading(false);
 

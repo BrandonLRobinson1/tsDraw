@@ -8,7 +8,7 @@ const login = async (req, res) => {
   if (!email || !password)
     return res
       .status(400)
-      .json({ message: "Username and password are required." });
+      .json({ message: "Email and password are required." });
 
   const foundUser = await User.findOne({ email }).exec();
   if (!foundUser) return res.status(401).json({ success: `Did not find user` });
@@ -38,7 +38,8 @@ const login = async (req, res) => {
 
     // TODO: look
     res.cookie("jwt", refreshToken, {
-      httpOnly: true,
+      // httpOnly: true,
+      httpOnly: false,
       secure: true,
       sameSite: "None",
       maxAge: 24 * 60 * 60 * 1000,
