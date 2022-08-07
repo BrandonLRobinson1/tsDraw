@@ -109,4 +109,5 @@ img{
   margin: 5px;
   background-color: lightgrey;
   border-radius: 22px;
+  cursor: pointer;
 }

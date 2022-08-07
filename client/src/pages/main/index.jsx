@@ -55,15 +55,18 @@ const Main = () => {
           Global Drawings
         </button>
       </div>
-      {/* {displayData && displayData.length ? ( */}
-      {userData && userData.length ? (
+      {displayData && displayData.length ? (
         <div className="cards">
           {userData.map((card, i) => (
             <Card />
           ))}
         </div>
       ) : (
-        <div className="message-container">uh oh</div>
+        <div className="message-container">
+          {filterByGlobal
+            ? "Uh oh, there are no global drawings yet!"
+            : "You haven't drawn anything yet, give it a try!"}
+        </div>
       )}
     </>
   );
