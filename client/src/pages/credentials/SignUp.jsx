@@ -1,15 +1,15 @@
-import React from "react";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
-import { ToastContainer, toast } from "react-toastify";
-import { baseUrl } from "../../lib/static";
-import "react-toastify/dist/ReactToastify.css";
-import "./index.css";
+import React from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { ToastContainer, toast } from 'react-toastify';
+import { baseUrl } from '../../lib/static';
+import 'react-toastify/dist/ReactToastify.css';
+import './index.css';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -17,14 +17,14 @@ const SignUp = () => {
   const schema = yup.object().shape({
     email: yup
       .string()
-      .required("Valid Email address is required")
-      .email("Valid Email address is required"),
+      .required('Valid Email address is required')
+      .email('Valid Email address is required'),
     password: yup
       .string()
-      .required("Please enter your password")
+      .required('Please enter your password')
       .matches(
         /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-        "Password must contain at least 8 characters, one uppercase, one number and one special case character"
+        'Password must contain at least 8 characters, one uppercase, one number and one special case character',
       ),
   });
 
@@ -32,7 +32,6 @@ const SignUp = () => {
     handleSubmit,
     control,
     formState: { errors },
-    // setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -45,21 +44,21 @@ const SignUp = () => {
 
       const config = {
         headers: {
-          "Content-Type": "application/JSON",
+          'Content-Type': 'application/JSON',
         },
       };
 
       const data = await axios.post(`${baseUrl}/register`, body, config);
-      console.log("data: ", data);
+      console.log('data: ', data);
 
-      toast.success("Lorem ipsum dolor");
+      toast.success('Sign up complete!');
 
-      navigate("/login");
+      navigate('/login');
     } catch (e) {
       const { response } = e;
 
       if (response.status === 500) {
-        toast.error("Cannot reach server");
+        toast.error('Cannot reach server');
       }
       toast.error(response.data.message);
     }
@@ -70,7 +69,7 @@ const SignUp = () => {
       <form className="credentials-box" onSubmit={handleSubmit(signUpSumbit)}>
         <div className="credentials-header">
           <div className="credentials-header-icon">
-            <FontAwesomeIcon size="2x" icon={solid("user")} />
+            <FontAwesomeIcon size="2x" icon={solid('user')} />
           </div>
           <div className="credentials-header-title">Sign Up</div>
         </div>

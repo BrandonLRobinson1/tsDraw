@@ -1,8 +1,8 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
+import React from 'react';
+import { Navigate } from 'react-router-dom';
 
 const PrivateRoute = ({ children }) => {
-  const isAuthenticated = localStorage.getItem("tsToken");
+  const isAuthenticated = localStorage.getItem('tsToken');
   if (!isAuthenticated) {
     return <Navigate to="/" replace />;
   }

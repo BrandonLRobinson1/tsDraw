@@ -9,7 +9,6 @@
 .main-filter-buttons-selected {
   height: 45px;
   margin: 15px;
-  /* width: 125px; */
   width: 8rem;
   display: flex;
   justify-content: center;
@@ -27,7 +26,6 @@
 .main-filter-buttons {
   height: 45px;
   margin: 15px;
-  /* width: 125px; */
   width: 8rem;
   display: flex;
   justify-content: center;
@@ -52,9 +50,7 @@
 
 .cards{
   display: grid;
-  /* grid-template-columns: repeat(auto-fit,minmax(335px,1fr)); */
-  grid-template-columns: repeat(auto-fit,minmax(335px, 525px));
-  /* padding: 20px; */
+  grid-template-columns: repeat(auto-fit,minmax(335px, 526px));
   padding: 10px;
   grid-gap: 40px;
 }
@@ -74,10 +70,8 @@ img{
   border-radius: 20px 20px 0 0;
   aspect-ratio: 1/1;
   background-color: white;
-   /* TODO: Look into saving better */
 }
 .card-container:after{
-  content: "";
   height: 100%;
   width: 100%;
   position: absolute;
@@ -118,4 +112,5 @@ img{
   border-radius: 22px;
   cursor: pointer;
   color: #2d2d2d;
+  border: none;
 }

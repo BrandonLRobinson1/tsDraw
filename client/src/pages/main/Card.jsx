@@ -1,7 +1,7 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
-import "./index.css";
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import './index.css';
 
 const Card = ({
   isGlobal,
@@ -16,10 +16,9 @@ const Card = ({
   <div className="card">
     <div className="card-container">
       {!isGlobal && (
-        // eslint-disable-next-line
-          <div className="delete-icon" onClick={() => onDelete(id)}>
-          <FontAwesomeIcon size="lg" icon={solid("trash")} />
-        </div>
+      <button type="button" className="delete-icon" onClick={() => onDelete(id)}>
+        <FontAwesomeIcon size="lg" icon={solid('trash')} />
+      </button>
       )}
       <img src={imageUrl} alt="" />
     </div>

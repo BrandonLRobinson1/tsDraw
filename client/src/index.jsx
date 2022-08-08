@@ -1,18 +1,18 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import App from "./App";
-import SignUp from "./pages/credentials/SignUp";
-import LogIn from "./pages/credentials/LogIn";
-import Main from "./pages/main";
-import Create from "./pages/create";
-import PrivateRoute from "./PrivateRoute";
-import { AuthProvider } from "./lib/context/AuthContext";
-import "./index.css";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import App from './App';
+import SignUp from './pages/credentials/SignUp';
+import LogIn from './pages/credentials/LogIn';
+import Main from './pages/main';
+import Create from './pages/create';
+import PrivateRoute from './PrivateRoute';
+import { AuthProvider } from './lib/context/AuthContext';
+import './index.css';
 
-import reportWebVitals from "./reportWebVitals";
+import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <AuthProvider>
@@ -22,24 +22,24 @@ root.render(
         <Route path="/register" element={<SignUp />} />
         <Route
           path="/main"
-          element={
+          element={(
             <PrivateRoute>
               <Main />
             </PrivateRoute>
-          }
+          )}
         />
         <Route
           path="/create"
-          element={
+          element={(
             <PrivateRoute>
               <Create />
             </PrivateRoute>
-          }
+          )}
         />
         <Route path="*" element={<div>404 page</div>} />
       </Routes>
     </AuthProvider>
-  </BrowserRouter>
+  </BrowserRouter>,
 );
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

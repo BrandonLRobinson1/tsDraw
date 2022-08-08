@@ -26,7 +26,6 @@
 }
 
 .navbar-button {
-  /* height: 50%; */
   height: 45px;
   margin: 15px;
   width: 100px;
@@ -44,7 +43,6 @@
 }
 
 .navbar-button-inactive-eraser {
-  /* height: 50%; */
   height: 45px;
   margin: 15px;
   width: 100px;
@@ -66,7 +64,7 @@
   .navbar-button {
     width: 20%;
   }
-  . navbar-button-inactive-eraser {
+  .navbar-button-inactive-eraser {
     width: 20%;
   }
 }

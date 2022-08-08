@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import { AuthContext } from "../../lib/context/AuthContext";
-import { baseUrl } from "../../lib/static";
-import "react-toastify/dist/ReactToastify.css";
-import "./index.css";
+import React, { useContext } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import { AuthContext } from '../../lib/context/AuthContext';
+import { baseUrl } from '../../lib/static';
+import 'react-toastify/dist/ReactToastify.css';
+import './index.css';
 
 const LogIn = () => {
   const navigate = useNavigate();
@@ -18,16 +18,15 @@ const LogIn = () => {
   const schema = yup.object().shape({
     email: yup
       .string()
-      .required("Valid Email address is required")
-      .email("Valid Email address is required"),
-    password: yup.string().required("Please enter your password"),
+      .required('Valid Email address is required')
+      .email('Valid Email address is required'),
+    password: yup.string().required('Please enter your password'),
   });
 
   const {
     handleSubmit,
     control,
     formState: { errors },
-    // setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -40,31 +39,31 @@ const LogIn = () => {
 
       const config = {
         headers: {
-          "Content-Type": "application/JSON",
+          'Content-Type': 'application/JSON',
         },
-        withCredentials: "include",
+        withCredentials: 'include',
       };
 
       const response = await axios.post(`${baseUrl}/login`, body, config);
 
       const token = response.data.accessToken;
 
-      localStorage.setItem("tsToken", JSON.stringify(token));
+      localStorage.setItem('tsToken', JSON.stringify(token));
 
       if (!token) {
-        toast.error("Uh-oh. Something went wrong!");
+        toast.error('Uh-oh. Something went wrong!');
       }
 
       setIsAuthenticated(true);
 
-      navigate("/main");
+      navigate('/main');
     } catch (e) {
       const { response } = e;
 
       if (response.status === 500) {
-        toast.error("Cannot reach server");
+        toast.error('Cannot reach server');
       }
-      toast.error("Uh oh, something went wrong!");
+      toast.error('Uh oh, something went wrong!');
     }
   };
 
@@ -73,7 +72,7 @@ const LogIn = () => {
       <form className="credentials-box" onSubmit={handleSubmit(logInSumbit)}>
         <div className="credentials-header">
           <div className="credentials-header-icon">
-            <FontAwesomeIcon size="2x" icon={solid("lock")} />
+            <FontAwesomeIcon size="2x" icon={solid('lock')} />
           </div>
           <div className="credentials-header-title">Log In</div>
         </div>

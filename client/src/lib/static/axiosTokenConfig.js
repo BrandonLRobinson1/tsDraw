@@ -1,8 +1,8 @@
-const token = JSON.parse(localStorage.getItem("tsToken"));
+const token = JSON.parse(localStorage.getItem('tsToken'));
 
 const axiosTokenConfig = {
   headers: {
-    "Content-Type": "application/JSON",
+    'Content-Type': 'application/JSON',
     authorization: `Bearer ${token}`,
   },
 };

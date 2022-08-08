@@ -1,19 +1,21 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
-import "./index.css";
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import './index.css';
 
-const NavCreate = ({ saveDrawing, eraser, eraserActive, clearCanvas }) => (
+const NavCreate = ({
+  saveDrawing, eraser, eraserActive, clearCanvas,
+}) => (
   <nav className="navbar">
     <div className="navbar-logo-container">
-      <FontAwesomeIcon size="lg" icon={solid("paintbrush")} />
+      <FontAwesomeIcon size="lg" icon={solid('paintbrush')} />
     </div>
     <div className="navbar-content-container">
       <button
         type="button"
         onClick={eraser}
         className={
-          eraserActive ? "navbar-button" : "navbar-button-inactive-eraser"
+          eraserActive ? 'navbar-button' : 'navbar-button-inactive-eraser'
         }
       >
         Eraser
