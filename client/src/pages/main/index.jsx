@@ -25,7 +25,6 @@ const Main = () => {
   const getAllDrawings = async () => {
     try {
       const response = await axios.get(`${baseUrl}/allDrawings`, config);
-      console.log("response.data all", response.data);
       setAllDrawings(response.data);
     } catch (e) {
       const { response } = e;

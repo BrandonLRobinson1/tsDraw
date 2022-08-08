@@ -4,8 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate } from "react-router-dom";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../../lib/context/AuthContext";
 import { baseUrl } from "../../lib/static";
@@ -73,7 +73,7 @@ const LogIn = () => {
       <form className="credentials-box" onSubmit={handleSubmit(logInSumbit)}>
         <div className="credentials-header">
           <div className="credentials-header-icon">
-            <FontAwesomeIcon size="2x" icon={solid("user-secret")} />
+            <FontAwesomeIcon size="2x" icon={solid("lock")} />
           </div>
           <div className="credentials-header-title">Log In</div>
         </div>
@@ -82,8 +82,7 @@ const LogIn = () => {
             <Controller
               name="email"
               control={control}
-              // defaultValue=""
-              defaultValue="fakeEmail@gmail.com"
+              defaultValue=""
               render={({ field: { onChange, value } }) => (
                 <input
                   onChange={(text) => onChange(text)}
@@ -101,8 +100,7 @@ const LogIn = () => {
             <Controller
               name="password"
               control={control}
-              // defaultValue=""
-              defaultValue="Brandonr82!"
+              defaultValue=""
               render={({ field: { onChange, value } }) => (
                 <input
                   onChange={(text) => onChange(text)}

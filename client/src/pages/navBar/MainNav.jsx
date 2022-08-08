@@ -24,7 +24,7 @@ const MainNav = () => {
   return (
     <nav className="navbar">
       <div className="navbar-logo-container">
-        <FontAwesomeIcon size="lg" icon={solid("user-secret")} />
+        <FontAwesomeIcon size="lg" icon={solid("paintbrush")} />
       </div>
       <div className="navbar-content-container">
         <Link to="/create" className="navbar-button">

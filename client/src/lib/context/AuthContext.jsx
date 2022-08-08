@@ -6,8 +6,6 @@ const { Provider } = AuthContext;
 const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  console.log("isAuthenticated: ", isAuthenticated);
-
   return (
     <Provider
       value={{

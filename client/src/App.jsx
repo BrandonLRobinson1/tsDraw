@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { Link } from "react-router-dom";
 
 import logo from "./logo.svg";
@@ -8,7 +10,11 @@ const App = () => (
   <div className="app-container">
     <div className="welcome-box">
       <div className="welcome-dialogue-container">
-        <img src={logo} className="App-logo" alt="logo" />
+        <FontAwesomeIcon
+          className="App-logo"
+          size="2x"
+          icon={solid("paintbrush")}
+        />
         <p>
           Welcome to the Talkspace drawing exercise, I have had a great time
           coding it!

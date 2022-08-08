@@ -6,10 +6,16 @@ import "./index.css";
 const NavCreate = ({ saveDrawing, eraser, eraserActive, clearCanvas }) => (
   <nav className="navbar">
     <div className="navbar-logo-container">
-      <FontAwesomeIcon size="lg" icon={solid("user-secret")} />
+      <FontAwesomeIcon size="lg" icon={solid("paintbrush")} />
     </div>
     <div className="navbar-content-container">
-      <button type="button" onClick={eraser} className="navbar-button">
+      <button
+        type="button"
+        onClick={eraser}
+        className={
+          eraserActive ? "navbar-button" : "navbar-button-inactive-eraser"
+        }
+      >
         Eraser
       </button>
       <button type="button" onClick={clearCanvas} className="navbar-button">

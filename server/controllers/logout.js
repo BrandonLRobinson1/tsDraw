@@ -1,4 +1,4 @@
-const User = require('../model/User');
+const User = require('../models/UserModel');
 
 const logout = async (req, res) => {
     const cookies = req.cookies;

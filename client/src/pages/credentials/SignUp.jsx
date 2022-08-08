@@ -70,7 +70,7 @@ const SignUp = () => {
       <form className="credentials-box" onSubmit={handleSubmit(signUpSumbit)}>
         <div className="credentials-header">
           <div className="credentials-header-icon">
-            <FontAwesomeIcon size="2x" icon={solid("user-secret")} />
+            <FontAwesomeIcon size="2x" icon={solid("user")} />
           </div>
           <div className="credentials-header-title">Sign Up</div>
         </div>
@@ -79,8 +79,7 @@ const SignUp = () => {
             <Controller
               name="email"
               control={control}
-              // defaultValue=""
-              defaultValue="fakeEmail@gmail.com"
+              defaultValue=""
               render={({ field: { onChange, value } }) => (
                 <input
                   onChange={(text) => onChange(text)}
@@ -98,8 +97,7 @@ const SignUp = () => {
             <Controller
               name="password"
               control={control}
-              // defaultValue=""
-              defaultValue="Brandonr82!"
+              defaultValue=""
               render={({ field: { onChange, value } }) => (
                 <input
                   onChange={(text) => onChange(text)}

@@ -108,31 +108,6 @@ const Create = () => {
     ctxRef.current = ctx;
   };
 
-  // const dataURLtoBlob = (dataURL) => {
-  //   const array = [];
-  //   const binary = atob(dataURL.split(",")[1]);
-  //   let i = 0;
-  //   const { length } = binary;
-  //   while (i < length) {
-  //     array.push(binary.charCodeAt(i));
-  //     // eslint-disable-next-line
-  //     i++;
-  //   }
-  //   return new Blob([new Uint8Array(array)], {
-  //     type: "image/png",
-  //   });
-  // };
-
-  // const saveDrawing = async () => {
-  //   const canvas = document.getElementById("canvas");
-  //   const file = dataURLtoBlob(canvas.toDataURL());
-  //   const fd = new FormData();
-  //   fd.append("image", file);
-  //   console.log("file", file);
-  //   // TODO:
-  //   // get email out of  context
-  // };
-
   const millisToMinutesAndSeconds = (millis) => {
     const minutes = Math.floor(millis / 60000);
     const seconds = ((millis % 60000) / 1000).toFixed(0);
@@ -153,7 +128,6 @@ const Create = () => {
       const readableDate = Date(beginningTime).split(" ");
       const dateCreated = `${readableDate[1]} ${readableDate[2]} ${readableDate[3]}`;
       const timeCreate = readableDate[4];
-      console.log("memberSince", dateCreated, timeCreate);
 
       const token = JSON.parse(localStorage.getItem("tsToken"));
 
@@ -201,6 +175,7 @@ const Create = () => {
         clearCanvas={clearCanvas}
         eraser={eraser}
         saveDrawing={saveDrawing}
+        eraserActive={eraserActive}
       />
       <div className="canvas-control-container">
         <div className="canvas-dropdown">
