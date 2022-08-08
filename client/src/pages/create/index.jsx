@@ -5,21 +5,13 @@ import { useNavigate } from "react-router-dom";
 import Dropdown from "../common/Dropdown";
 import NavCreate from "../navBar/NavCreate";
 import Loading from "../common/Loading";
-import {
-  colorsOptions,
-  brushSize,
-  strokeSize,
-  brushType,
-  viewTypes,
-  baseUrl,
-} from "../../lib/static";
+import { colorsOptions, brushSize, viewTypes, baseUrl } from "../../lib/static";
 import "./index.css";
 
 const Create = () => {
   const navigate = useNavigate();
   const [currentlyDrawing, setCurrentlyDrawing] = useState(false);
   const [viewType, setViewType] = useState("public");
-  const [isLoading, setIsLoading] = useState(false);
   const [eraserActive, setEraserActive] = useState(false);
   const [prevCtx, setPrevCtx] = useState(false);
   const canvasRef = useRef(null);
@@ -115,7 +107,6 @@ const Create = () => {
   };
 
   const saveDrawing = async () => {
-    setIsLoading(true);
     try {
       const endTime = new Date();
       const canvasSave = document.getElementById("canvas");
@@ -150,15 +141,11 @@ const Create = () => {
 
       await axios.post(`${baseUrl}/create`, body, config);
 
-      setIsLoading(false);
-
       toast.success("Drawing saved!");
 
       navigate("/main");
     } catch (e) {
       const { response } = e;
-
-      setIsLoading(false);
 
       if (response.status === 500) {
         toast.error("Cannot reach server");
@@ -166,8 +153,6 @@ const Create = () => {
       toast.error(response.data.message);
     }
   };
-
-  if (isLoading) return <Loading />;
 
   return (
     <div>

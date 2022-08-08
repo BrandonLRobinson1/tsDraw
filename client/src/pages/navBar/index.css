@@ -62,4 +62,11 @@
   cursor: pointer;
 }
 
-@media only screen and (max-width: 450px) {}
+@media only screen and (max-width: 450px) {
+  .navbar-button {
+    width: 20%;
+  }
+  . navbar-button-inactive-eraser {
+    width: 20%;
+  }
+}
