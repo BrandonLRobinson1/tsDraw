@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Card from './Card';
 import MainNav from '../navBar/MainNav';
 import Loading from '../common/Loading';
@@ -54,7 +54,7 @@ const Main = () => {
     try {
       setIsLoading(true);
       await axios.post(`${baseUrl}/deleteDrawing`, { id }, axiosTokenConfig);
-      toast.info('Drawing deleted');
+      toast.success('Drawing deleted');
       await getMyDrawings();
       await getAllDrawings();
     } catch (e) {
@@ -137,16 +137,6 @@ const Main = () => {
             : "You haven't drawn anything yet, give it a try!"}
         </div>
       )}
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        closeOnClick
-        draggable
-        pauseOnHover
-        pauseOnFocusLoss
-        limit={1}
-      />
     </>
   );
 };

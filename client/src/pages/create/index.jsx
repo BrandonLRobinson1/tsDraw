@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Dropdown from '../common/Dropdown';
 import NavCreate from '../navBar/NavCreate';
@@ -24,7 +24,6 @@ const Create = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
 
-    // double pixel density to support computers with larger screen densities (retina)
     canvas.height = window.innerHeight * 2;
     canvas.width = window.innerWidth * 2;
 
@@ -33,7 +32,6 @@ const Create = () => {
 
     const ctx = canvas.getContext('2d');
 
-    // also needed to support higher screen density
     ctx.scale(2, 2);
     ctx.lineCap = 'round';
     ctx.strokeStyle = 'blue';
@@ -190,16 +188,6 @@ const Create = () => {
         onMouseUp={endDrawing}
         onMouseMove={draw}
         ref={canvasRef}
-      />
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        closeOnClick
-        draggable
-        pauseOnHover
-        pauseOnFocusLoss
-        limit={1}
       />
     </div>
   );

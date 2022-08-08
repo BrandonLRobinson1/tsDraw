@@ -35,7 +35,7 @@ const createNewDrawing = async (req, res) => {
     if (duplicate)
       return res.status(409).json({ message: "This picture already exists" });
 
-    const result = await Drawing.create({
+    await Drawing.create({
       email: req.email,
       url,
       viewType,
@@ -43,8 +43,6 @@ const createNewDrawing = async (req, res) => {
       creationDate,
       timeToCreate,
     });
-
-    console.log(result);
 
     res.status(201).json({ success: `New user picture created!` });
   } catch (err) {

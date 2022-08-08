@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -6,7 +6,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../lib/context/AuthContext';
 import { baseUrl } from '../../lib/static';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,6 +15,7 @@ import './index.css';
 const LogIn = () => {
   const navigate = useNavigate();
   const { setIsAuthenticated } = useContext(AuthContext);
+  const [redirect, setRedirect] = useState(false);
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -30,6 +31,10 @@ const LogIn = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    if (redirect) navigate('/main');
+  }, [redirect]);
 
   const logInSumbit = async (userCredentials) => {
     try {
@@ -56,7 +61,7 @@ const LogIn = () => {
 
       setIsAuthenticated(true);
 
-      navigate('/main');
+      setRedirect(true);
     } catch (e) {
       const { response } = e;
 
@@ -122,16 +127,6 @@ const LogIn = () => {
           <div className="help-text">Forgot your password?</div>
         </div>
       </form>
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        closeOnClick
-        draggable
-        pauseOnHover
-        pauseOnFocusLoss
-        limit={1}
-      />
     </div>
   );
 };
