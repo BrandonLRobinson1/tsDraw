@@ -2,11 +2,9 @@ const Drawing = require("../models/DrawingModel");
 
 const createNewDrawing = async (req, res) => {
   try {
+    const { url, viewType, createTime, creationDate, timeToCreate } = req.body;
 
-    const { email, url, viewType, createTime, creationDate, timeToCreate } =
-      req.body;
-
-    if (!email)
+    if (!req.email)
       return res.status(400).json({ message: "Info does not contain email" });
 
     if (!url)
@@ -32,14 +30,13 @@ const createNewDrawing = async (req, res) => {
         .status(400)
         .json({ message: "Info does not contain time to create" });
 
-
     const duplicate = await Drawing.findOne({ url }).exec();
 
     if (duplicate)
       return res.status(409).json({ message: "This picture already exists" });
 
     const result = await Drawing.create({
-      email,
+      email: req.email,
       url,
       viewType,
       createTime,
@@ -55,25 +52,33 @@ const createNewDrawing = async (req, res) => {
   }
 };
 
-const getAllDrawings = async (req, res) => {
-  const drawings = await Drawing.find();
-  if (!drawings) return res.status(204).json({ 'message': 'No drawings found.' });
+const getMyDrawings = async (req, res) => {
+  const drawings = await Drawing.find({ email: req.email });
+  if (!drawings) return res.status(204).json({ message: "No drawings found." });
   res.json(drawings);
-}
+};
+
+const getAllDrawings = async (req, res) => {
+  const drawings = await Drawing.find({ viewType: "public" });
+  if (!drawings) return res.status(204).json({ message: "No drawings found." });
+  res.json(drawings);
+};
 
 const deleteDrawing = async (req, res) => {
-  if (!req?.body?.id) return res.status(400).json({ 'message': 'Drawing ID required.' });
+  const { id } = req.body;
+  if (!id) return res.status(400).json({ message: "Drawing ID required." });
 
-  const drawing = await Drawing.findOne({ _id: req.body.id }).exec();
+  const drawing = await Drawing.findOne({ _id: id }).exec();
   if (!drawing) {
-      return res.status(204).json({ "message": `No drawing matches ID ${req.body.id}.` });
+    return res.status(204).json({ message: `No drawing matches ID ${id}.` });
   }
   const result = await drawing.deleteOne();
   res.json(result);
-}
+};
 
 module.exports = {
+  getMyDrawings,
   getAllDrawings,
   createNewDrawing,
   deleteDrawing,
-}
+};

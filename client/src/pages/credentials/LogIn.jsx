@@ -17,7 +17,7 @@ import "./index.css";
 const baseUrl = "http://localhost:3100";
 const LogIn = () => {
   const navigate = useNavigate();
-  const { setIsAuthenticated, setEmail } = useContext(AuthContext);
+  const { setIsAuthenticated } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const schema = yup.object().shape({
     email: yup
@@ -37,7 +37,6 @@ const LogIn = () => {
   });
 
   const logInSumbit = async (userCredentials) => {
-    setIsLoading(true);
     try {
       const { email, password } = userCredentials;
 
@@ -62,22 +61,16 @@ const LogIn = () => {
 
       setIsAuthenticated(true);
 
-      setEmail(email); // <------- 🔥 Return to this
-
-      setIsLoading(false);
-
       navigate("/main");
     } catch (e) {
       const { response } = e;
-      setIsLoading(false);
+
       if (response.status === 500) {
         toast.error("Cannot reach server");
       }
-      toast.error(response.data.message);
+      toast.error("Uh oh, something went wrong!");
     }
   };
-
-  if (isLoading) return <Loading />;
 
   return (
     <div className="app-container">

@@ -5,40 +5,42 @@ import "./index.css";
 
 // TODO:
 /* eslint-disable */
-const Card = ({ isGlobal, onDelete, imageUrl, creationData, userEmail }) => (
-  <div className="card">
-    <div className="card-container">
-      <div className="delete-icon">
-        <FontAwesomeIcon size="lg" icon={solid("user-secret")} />
+const Card = ({ isGlobal, onDelete, imageUrl, createTime, email, creationDate, timeToCreate, id }) => {
+  console.log('⭐', id)
+  return (
+    <div className="card">
+      <div className="card-container">
+        {!isGlobal && (
+          <div className="delete-icon" onClick={() => onDelete(id)}>
+           <FontAwesomeIcon size="lg" icon={solid("user-secret")} />
+          </div>
+        )}
+        <img
+          src={imageUrl}
+          alt="las vegas"
+        />
       </div>
-      <img
-        src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-        alt="las vegas"
-      />
+      <div className="details">
+        <h4>Email</h4>
+        <p>
+          {email}
+        </p>
+        <h4>Creation Date</h4>
+        <p>
+          {creationDate}
+        </p>
+        <h4>Time of creation</h4>
+        <p>
+          {`${createTime} EST - massage`}
+        </p>
+
+        <h4>Total Create Time</h4>
+        <p>
+          {`${timeToCreate} minutes - massage`}
+        </p>
+      </div>
     </div>
-    <div className="details">
-      <h3>Las Vegas</h3>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium
-        dignissimos, minus aperiam adipisci exercitationem.
-      </p>
-      <h3>Las Vegas</h3>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium
-        dignissimos, minus aperiam adipisci exercitationem.
-      </p>
-      <h3>Las Vegas</h3>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium
-        dignissimos, minus aperiam adipisci exercitationem.
-      </p>
-      <h3>Las Vegas</h3>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium
-        dignissimos, minus aperiam adipisci exercitationem.
-      </p>
-    </div>
-  </div>
-);
+  );
+}
 
 export default Card;

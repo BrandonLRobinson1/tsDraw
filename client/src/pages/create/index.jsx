@@ -20,9 +20,7 @@ const baseUrl = "http://localhost:3100";
 
 const Create = () => {
   const navigate = useNavigate();
-  const { email } = useContext(AuthContext);
   const [currentlyDrawing, setCurrentlyDrawing] = useState(false);
-  // const [save, setSave] = useState(false);
   const [viewType, setViewType] = useState("public");
   const [isLoading, setIsLoading] = useState(false);
   const [eraserActive, setEraserActive] = useState(false);
@@ -164,16 +162,12 @@ const Create = () => {
       const token = JSON.parse(localStorage.getItem("tsToken"));
 
       const axiosBody = {
-        // email,
-        email: "fakeEmail@gmail.comb",
         url: drawingUrl,
         viewType,
         createTime: timeCreate,
         creationDate: dateCreated,
         timeToCreate: elapsedTime,
       };
-
-      console.log("???", axiosBody);
 
       const body = JSON.stringify(axiosBody);
 
@@ -182,18 +176,15 @@ const Create = () => {
           "Content-Type": "application/JSON",
           authorization: `Bearer ${token}`,
         },
-        // withCredentials: "include",
       };
 
       const response = await axios.post(`${baseUrl}/create`, body, config);
 
-      console.log("????", response);
-
       setIsLoading(false);
 
-      toast.success("Lorem ipsum dolor");
+      toast.success("Drawing saved!");
 
-      // navigate("/main");
+      navigate("/main");
     } catch (e) {
       const { response } = e;
 

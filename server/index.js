@@ -10,6 +10,7 @@ const {
   createNewDrawing,
   getAllDrawings,
   deleteDrawing,
+  getMyDrawings,
 } = require("./controllers/drawings");
 
 const PORT = process.env.PORT || 3100;
@@ -47,17 +48,19 @@ app.use("/register", register);
 
 app.use("/login", login);
 
-// ----------------->
-app.use(verifyJWT);
+// app.get("/", (req, res) => {
+//   res.send("Hello World!");
+// });
 
-// getAllDrawings,
-// deleteDrawing,
+app.use(verifyJWT);
 
 app.use("/create", createNewDrawing);
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.use("/allDrawings", getAllDrawings);
+
+app.use("/myDrawings", getMyDrawings);
+
+app.use("/deleteDrawing", deleteDrawing);
 
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDB 🦊");

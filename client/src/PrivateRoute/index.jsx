@@ -3,11 +3,14 @@ import { Navigate } from "react-router-dom";
 import App from "../App";
 import { AuthContext } from "../lib/context/AuthContext";
 
-// TODO:
+// TODO: ---- might delete context
 // eslint-disable-next-line
 const PrivateRoute = ({ children }) => {
-  const { isAuthenticated } = useContext(AuthContext);
-  if (!isAuthenticated) {
+  // const { isAuthenticated } = useContext(AuthContext);
+  const isAuthenticated = localStorage.getItem("tsToken");
+  // const isAuthenticated = localStorage.getItem("tsLoken");
+  console.log("isAuthenticated --->", isAuthenticated.length);
+  if (!isAuthenticated.length) {
     return <Navigate to="/" replace />;
   }
 

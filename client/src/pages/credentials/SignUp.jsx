@@ -43,7 +43,6 @@ const SignUp = () => {
   });
 
   const signUpSumbit = async (userCredentials) => {
-    setIsLoading(true);
     try {
       const { email, password } = userCredentials;
 
@@ -58,15 +57,11 @@ const SignUp = () => {
       const data = await axios.post(`${baseUrl}/register`, body, config);
       console.log("data: ", data);
 
-      setIsLoading(false);
-
       toast.success("Lorem ipsum dolor");
 
       navigate("/login");
     } catch (e) {
       const { response } = e;
-
-      setIsLoading(false);
 
       if (response.status === 500) {
         toast.error("Cannot reach server");
@@ -74,8 +69,6 @@ const SignUp = () => {
       toast.error(response.data.message);
     }
   };
-
-  if (isLoading) return <Loading />;
 
   return (
     <div className="app-container">

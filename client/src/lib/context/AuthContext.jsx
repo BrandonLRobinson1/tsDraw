@@ -7,7 +7,6 @@ const { Provider } = AuthContext;
 // eslint-disable-next-line
 const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [email, setEmail] = useState(false);
 
   console.log("isAuthenticated: ", isAuthenticated);
 
@@ -16,8 +15,6 @@ const AuthProvider = ({ children }) => {
       value={{
         isAuthenticated,
         setIsAuthenticated,
-        email,
-        setEmail,
       }}
     >
       {children}

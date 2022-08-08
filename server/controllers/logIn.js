@@ -10,7 +10,7 @@ const login = async (req, res) => {
       .status(400)
       .json({ message: "Email and password are required." });
 
-  const foundUser = await User.findOne({ email }).exec();
+  const foundUser = await User.findOne({ email: email.toLowerCase() }).exec();
   if (!foundUser) return res.status(401).json({ success: `Did not find user` });
 
   const match = await bcrypt.compare(password, foundUser.password);

@@ -50,7 +50,8 @@
 
 .cards{
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(335px,1fr));
+  /* grid-template-columns: repeat(auto-fit,minmax(335px,1fr)); */
+  grid-template-columns: repeat(auto-fit,minmax(335px, 525px));
   /* padding: 20px; */
   padding: 10px;
   grid-gap: 40px;
@@ -68,6 +69,8 @@ img{
   width: 100%;
   display: block;
   border-radius: 20px 20px 0 0;
+  aspect-ratio: 1/1;
+   /* TODO: Look into saving better */
 }
 .card-container:after{
   content: "";
@@ -83,7 +86,7 @@ img{
 .details{
   padding: 20px 10px;
 }
-.details>h3{
+.details>h4{
   color: #ffffff;
   font-weight: 600;
   font-size: 18px;

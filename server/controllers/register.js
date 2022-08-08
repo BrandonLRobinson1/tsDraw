@@ -10,7 +10,7 @@ const register = async (req, res) => {
         .status(400)
         .json({ message: "Email and password are required." });
 
-    const duplicate = await User.findOne({ email }).exec();
+    const duplicate = await User.findOne({ email: email.toLowerCase() }).exec();
 
     if (duplicate)
       return res.status(409).json({ message: "This email is being used" });
@@ -18,7 +18,7 @@ const register = async (req, res) => {
     const hashedPwd = await bcrypt.hash(password, 10);
 
     const result = await User.create({
-      email,
+      email: email.toLowerCase(),
       password: hashedPwd,
     });
 

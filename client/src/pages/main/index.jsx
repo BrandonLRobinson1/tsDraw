@@ -1,28 +1,88 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 import Card from "./Card";
 import MainNav from "../navBar/MainNav";
 import Loading from "../common/Loading";
 import "./index.css";
 
+// TODO: rename and move
+const baseUrl = "http://localhost:3100";
+// maybe config too
+
 const Main = () => {
   // TODO: make a reusable
-  const [isLoading, setIsLoading] = useState(true);
-  const [userData, setUserData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [allDrawings, setAllDrawings] = useState([]);
+  const [myDrawings, setMyDrawings] = useState([]);
   const [filterByGlobal, setFilterByGlobal] = useState(false);
 
+  const token = JSON.parse(localStorage.getItem("tsToken"));
+
+  const config = {
+    headers: {
+      "Content-Type": "application/JSON",
+      authorization: `Bearer ${token}`,
+    },
+  };
+
+  const getAllDrawings = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/allDrawings`, config);
+      console.log("response.data all", response.data);
+      setAllDrawings(response.data);
+    } catch (e) {
+      const { response } = e;
+
+      if (response.status === 500) {
+        toast.error("Cannot reach server");
+      }
+      toast.error(response.data.message);
+    }
+  };
+
+  const getMyDrawings = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/myDrawings`, config);
+
+      setMyDrawings(response.data);
+      console.log("response.data my email", response.data);
+      setIsLoading(false);
+    } catch (e) {
+      const { response } = e;
+
+      setIsLoading(false);
+
+      if (response.status === 500) {
+        toast.error("Cannot reach server");
+      }
+      toast.error(response.data.message);
+    }
+  };
+
+  const deleteMyDrawing = async (id) => {
+    try {
+      setIsLoading(true);
+      await axios.post(`${baseUrl}/deleteDrawing`, { id }, config);
+      toast.info("Drawing deleted");
+      await getMyDrawings();
+      await getAllDrawings();
+    } catch (e) {
+      const { response } = e;
+      setIsLoading(false);
+      if (response.status === 500) {
+        toast.error("Cannot reach server");
+      }
+      toast.error(response.data.message);
+    }
+  };
+
   useEffect(() => {
-    // axios getDrawings
-    setUserData([1, 1, 1, 1, 1]);
-    setIsLoading(false);
+    getMyDrawings();
+    getAllDrawings();
   }, []);
 
-  let displayData = userData;
-  console.log("displayData", displayData);
-
-  if (filterByGlobal && displayData.length)
-    displayData = displayData.filter(
-      (drawingData) => drawingData.thing === true
-    );
+  const displayData = filterByGlobal ? allDrawings : myDrawings;
 
   const handleMyDrawingClick = () =>
     filterByGlobal ? setFilterByGlobal(false) : null;
@@ -61,9 +121,23 @@ const Main = () => {
       </div>
       {displayData && displayData.length ? (
         <div className="cards">
-          {userData.map((card, i) => (
-            <Card />
-          ))}
+          {displayData.map((card, i) => {
+            const { url, createTime, creationDate, timeToCreate, email, _id } =
+              card;
+            return (
+              <Card
+                key={_id}
+                isGlobal={filterByGlobal}
+                id={_id}
+                onDelete={deleteMyDrawing}
+                imageUrl={url}
+                creationDate={creationDate}
+                createTime={createTime}
+                email={email}
+                timeToCreate={timeToCreate}
+              />
+            );
+          })}
         </div>
       ) : (
         <div className="message-container">
@@ -72,6 +146,16 @@ const Main = () => {
             : "You haven't drawn anything yet, give it a try!"}
         </div>
       )}
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick
+        draggable
+        pauseOnHover
+        pauseOnFocusLoss
+        limit={1}
+      />
     </>
   );
 };
