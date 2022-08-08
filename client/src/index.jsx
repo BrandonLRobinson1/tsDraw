@@ -17,18 +17,25 @@ root.render(
   <BrowserRouter>
     <AuthProvider>
       <Routes>
-        {/* TODO: need 404 page */}
         <Route path="/" element={<App />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/register" element={<SignUp />} />
-
-        <Route path="/main" element={<Main />} />
-        <Route path="/create" element={<Create />} />
-
-        {/* <Route element={<PrivateRoute />}>
-          <Route path="/main" element={<Main />} />
-          <Route path="/create" element={<Create />} />
-        </Route> */}
+        <Route
+          path="/main"
+          element={
+            <PrivateRoute>
+              <Main />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/create"
+          element={
+            <PrivateRoute>
+              <Create />
+            </PrivateRoute>
+          }
+        />
         <Route path="*" element={<div>404 page</div>} />
       </Routes>
     </AuthProvider>

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -8,17 +8,13 @@ import { useNavigate } from "react-router-dom";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../../lib/context/AuthContext";
-import Loading from "../common/Loading";
-
+import { baseUrl } from "../../lib/static";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
 
-// TODO: rename and move
-const baseUrl = "http://localhost:3100";
 const LogIn = () => {
   const navigate = useNavigate();
   const { setIsAuthenticated } = useContext(AuthContext);
-  const [isLoading, setIsLoading] = useState(false);
   const schema = yup.object().shape({
     email: yup
       .string()

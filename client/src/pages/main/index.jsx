@@ -4,14 +4,10 @@ import { ToastContainer, toast } from "react-toastify";
 import Card from "./Card";
 import MainNav from "../navBar/MainNav";
 import Loading from "../common/Loading";
+import { baseUrl } from "../../lib/static";
 import "./index.css";
 
-// TODO: rename and move
-const baseUrl = "http://localhost:3100";
-// maybe config too
-
 const Main = () => {
-  // TODO: make a reusable
   const [isLoading, setIsLoading] = useState(false);
   const [allDrawings, setAllDrawings] = useState([]);
   const [myDrawings, setMyDrawings] = useState([]);
@@ -121,7 +117,7 @@ const Main = () => {
       </div>
       {displayData && displayData.length ? (
         <div className="cards">
-          {displayData.map((card, i) => {
+          {displayData.map((card) => {
             const { url, createTime, creationDate, timeToCreate, email, _id } =
               card;
             return (

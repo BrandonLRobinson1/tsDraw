@@ -1,7 +1,6 @@
 import * as React from "react";
 import "./index.css";
 
-// TODO:
 /* eslint-disable */
 const Dropdown = ({ label, value, options, onChange }) => (
   <label>

@@ -1,13 +1,4 @@
-// TODO:: maybe move
-
-// export const colorsOptions = [
-// {value: 'grey', label: 'grey'},
-// {value: 'grey', label: 'grey'},
-// {value: 'grey', label: 'grey'},
-// {value: 'grey', label: 'grey'},
-// {value: 'grey', label: 'grey'},
-// {value: 'grey', label: 'grey'},
-// ]
+export const baseUrl = "http://localhost:3100";
 
 export const colorsOptions = [
   { value: "Blue", label: "Blue" },

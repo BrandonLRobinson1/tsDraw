@@ -3,8 +3,6 @@ import React, { createContext, useState } from "react";
 const AuthContext = createContext();
 const { Provider } = AuthContext;
 
-// TODO:
-// eslint-disable-next-line
 const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 

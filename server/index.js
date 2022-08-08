@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const verifyJWT = require("./middleware/verifyJWT");
 const register = require("./controllers/register");
 const login = require("./controllers/logIn");
+const logout = require("./controllers/logout");
 const {
   createNewDrawing,
   getAllDrawings,
@@ -37,9 +38,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "50mb" }));
 
-app.use(express.json());
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 // app.use(express.static(path.join(__dirname, "../client", "build")));
 // app.use(express.static("public"));
@@ -61,6 +62,8 @@ app.use("/allDrawings", getAllDrawings);
 app.use("/myDrawings", getMyDrawings);
 
 app.use("/deleteDrawing", deleteDrawing);
+
+app.use("/logout", logout);
 
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDB 🦊");

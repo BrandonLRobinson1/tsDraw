@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Dropdown from "../common/Dropdown";
 import NavCreate from "../navBar/NavCreate";
-import { AuthContext } from "../../lib/context/AuthContext";
 import Loading from "../common/Loading";
 import {
   colorsOptions,
@@ -12,11 +11,9 @@ import {
   strokeSize,
   brushType,
   viewTypes,
-} from "./dropdownValues";
+  baseUrl,
+} from "../../lib/static";
 import "./index.css";
-
-// TODO: rename and move
-const baseUrl = "http://localhost:3100";
 
 const Create = () => {
   const navigate = useNavigate();
@@ -31,9 +28,8 @@ const Create = () => {
   const beginningTime = new Date();
 
   useEffect(() => {
-    console.log("canvasRef", canvasRef);
-
     const canvas = canvasRef.current;
+
     // double pixel density to support computers with larger screen densities (retina)
     canvas.height = window.innerHeight * 2;
     canvas.width = window.innerWidth * 2;
@@ -178,7 +174,7 @@ const Create = () => {
         },
       };
 
-      const response = await axios.post(`${baseUrl}/create`, body, config);
+      await axios.post(`${baseUrl}/create`, body, config);
 
       setIsLoading(false);
 
@@ -196,19 +192,6 @@ const Create = () => {
       toast.error(response.data.message);
     }
   };
-
-  console.log("ctxRef", ctxRef);
-
-  // const changeCanvasScale = (attr, val) => {
-  //   const ctx = canvas.getContext("2d");
-
-  //   // also needed to support higher screen density
-  //   ctx.scale(2, 2);
-  //   ctx.lineCap = "round";
-  //   ctx.strokeStyle = "blue";
-  //   ctx.lineWidth = 10;
-  //   ctxRef.current = ctx;
-  // };
 
   if (isLoading) return <Loading />;
 
@@ -238,24 +221,7 @@ const Create = () => {
             onChange={(e) => changeCanvasValue("lineWidth", e.target.value)}
           />
         </div>
-        <div className="Brush Type">
-          <Dropdown
-            label="Brush Type"
-            value="label"
-            defaultValue={brushType[0]}
-            options={brushType}
-            onChange={(e) => changeCanvasValue("lineCap", e.target.value)}
-          />
-        </div>
-        <div className="canvas-dropdown">
-          <Dropdown
-            label="Stroke Size"
-            value="label"
-            defaultValue={strokeSize[0]}
-            options={strokeSize}
-            onChange={(e) => console.log("hi")}
-          />
-        </div>
+
         <div className="canvas-dropdown">
           <Dropdown
             label="Public/Private"

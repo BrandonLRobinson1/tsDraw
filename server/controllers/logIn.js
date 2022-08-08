@@ -36,7 +36,6 @@ const login = async (req, res) => {
 
     console.log(result);
 
-    // TODO: look
     res.cookie("jwt", refreshToken, {
       // httpOnly: true,
       httpOnly: false,
