@@ -1,17 +1,19 @@
-import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import Dropdown from "../common/Dropdown";
-import NavCreate from "../navBar/NavCreate";
-import axiosTokenConfig from "../../lib/static/axiosTokenConfig";
-import { colorsOptions, brushSize, viewTypes, baseUrl } from "../../lib/static";
-import "./index.css";
+import React, { useEffect, useState, useRef } from 'react';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import Dropdown from '../common/Dropdown';
+import NavCreate from '../navBar/NavCreate';
+import axiosTokenConfig from '../../lib/static/axiosTokenConfig';
+import {
+  colorsOptions, brushSize, viewTypes, baseUrl,
+} from '../../lib/static';
+import './index.css';
 
 const Create = () => {
   const navigate = useNavigate();
   const [currentlyDrawing, setCurrentlyDrawing] = useState(false);
-  const [viewType, setViewType] = useState("public");
+  const [viewType, setViewType] = useState('public');
   const [eraserActive, setEraserActive] = useState(false);
   const [prevCtx, setPrevCtx] = useState(false);
   const canvasRef = useRef(null);
@@ -29,12 +31,12 @@ const Create = () => {
     canvas.style.height = `${window.innerHeight}px`;
     canvas.style.width = `${window.innerWidth}px`;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
 
     // also needed to support higher screen density
     ctx.scale(2, 2);
-    ctx.lineCap = "round";
-    ctx.strokeStyle = "blue";
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = 'blue';
     ctx.lineWidth = 10;
     ctxRef.current = ctx;
   }, []);
@@ -60,15 +62,15 @@ const Create = () => {
 
   const clearCanvas = () => {
     const canvas = canvasRef.current;
-    const context = canvas.getContext("2d");
-    context.fillStyle = "white";
+    const context = canvas.getContext('2d');
+    context.fillStyle = 'white';
     context.fillRect(0, 0, canvas.width, canvas.height);
   };
 
   const eraser = () => {
     // TODO: look
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (!eraserActive) {
       setEraserActive(true);
 
@@ -78,8 +80,8 @@ const Create = () => {
         lineWidth: ctx.lineWidth,
       });
 
-      ctx.lineCap = "round";
-      ctx.strokeStyle = "white";
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = 'white';
       ctx.lineWidth = 30;
       ctxRef.current = ctx;
     } else {
@@ -95,7 +97,7 @@ const Create = () => {
 
   const changeCanvasValue = (attr, val) => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     ctx[attr] = val;
     ctxRef.current = ctx;
   };
@@ -103,19 +105,19 @@ const Create = () => {
   const millisToMinutesAndSeconds = (millis) => {
     const minutes = Math.floor(millis / 60000);
     const seconds = ((millis % 60000) / 1000).toFixed(0);
-    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
   const saveDrawing = async () => {
     try {
       const endTime = new Date();
-      const canvasSave = document.getElementById("canvas");
-      const drawingUrl = canvasSave.toDataURL("image/png");
+      const canvasSave = document.getElementById('canvas');
+      const drawingUrl = canvasSave.toDataURL('image/png');
 
       const miliseconds = endTime - beginningTime;
       const elapsedTime = millisToMinutesAndSeconds(miliseconds);
 
-      const readableDate = Date(beginningTime).split(" ");
+      const readableDate = Date(beginningTime).split(' ');
       const dateCreated = `${readableDate[1]} ${readableDate[2]} ${readableDate[3]}`;
       const timeCreate = readableDate[4];
 
@@ -131,14 +133,14 @@ const Create = () => {
 
       await axios.post(`${baseUrl}/create`, body, axiosTokenConfig);
 
-      toast.success("Drawing saved!");
+      toast.success('Drawing saved!');
 
-      navigate("/main");
+      navigate('/main');
     } catch (e) {
       const { response } = e;
 
       if (response.status === 500) {
-        toast.error("Cannot reach server");
+        toast.error('Cannot reach server');
       }
       toast.error(response.data.message);
     }
@@ -159,7 +161,7 @@ const Create = () => {
             value={ctxRef.strokeStyle}
             defaultValue={colorsOptions[0]}
             options={colorsOptions}
-            onChange={(e) => changeCanvasValue("strokeStyle", e.target.value)}
+            onChange={(e) => changeCanvasValue('strokeStyle', e.target.value)}
           />
         </div>
         <div className="canvas-dropdown">
@@ -168,7 +170,7 @@ const Create = () => {
             value={ctxRef.lineWidth}
             defaultValue={brushSize[0]}
             options={brushSize}
-            onChange={(e) => changeCanvasValue("lineWidth", e.target.value)}
+            onChange={(e) => changeCanvasValue('lineWidth', e.target.value)}
           />
         </div>
 

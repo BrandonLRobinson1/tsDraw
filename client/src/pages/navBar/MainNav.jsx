@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate, Link } from 'react-router-dom';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { AuthContext } from '../../lib/context/AuthContext';
 import { baseUrl } from '../../lib/static';
 import './index.css';
 
 const MainNav = () => {
+  const { setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const logout = async () => {
@@ -14,6 +16,7 @@ const MainNav = () => {
       axios.get(`${baseUrl}/logout`);
       document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
       localStorage.clear();
+      setIsAuthenticated(false);
       navigate('/');
     } catch (e) {
       console.log(e.message);
