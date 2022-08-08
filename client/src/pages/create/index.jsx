@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Dropdown from "../common/Dropdown";
 import NavCreate from "../navBar/NavCreate";
-import Loading from "../common/Loading";
+import axiosTokenConfig from "../../lib/static/axiosTokenConfig";
 import { colorsOptions, brushSize, viewTypes, baseUrl } from "../../lib/static";
 import "./index.css";
 
@@ -114,13 +114,10 @@ const Create = () => {
 
       const miliseconds = endTime - beginningTime;
       const elapsedTime = millisToMinutesAndSeconds(miliseconds);
-      // alst need this for creation time -> beginningTime
 
       const readableDate = Date(beginningTime).split(" ");
       const dateCreated = `${readableDate[1]} ${readableDate[2]} ${readableDate[3]}`;
       const timeCreate = readableDate[4];
-
-      const token = JSON.parse(localStorage.getItem("tsToken"));
 
       const axiosBody = {
         url: drawingUrl,
@@ -132,14 +129,7 @@ const Create = () => {
 
       const body = JSON.stringify(axiosBody);
 
-      const config = {
-        headers: {
-          "Content-Type": "application/JSON",
-          authorization: `Bearer ${token}`,
-        },
-      };
-
-      await axios.post(`${baseUrl}/create`, body, config);
+      await axios.post(`${baseUrl}/create`, body, axiosTokenConfig);
 
       toast.success("Drawing saved!");
 
