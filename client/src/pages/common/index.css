@@ -1,0 +1,42 @@
+.dropdown-label {
+  font-size: 14px;
+  padding-right: 5px;
+}
+
+.select-dropdown {
+  padding: 8px 12px;
+  color: #333333;
+  background-color: #eeeeee;
+  border: 1px solid #dddddd;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.loading-container {
+  background-color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(6px + 2vmin);
+  color:  var(--primary-color);
+}
+
+.select-dropdown:focus,
+.select-dropdown:hover {
+  outline: none;
+  border: 1px solid #bbbbbb;
+}
+
+@media only screen and (max-width: 450px) {
+  .welcome-box {
+    height: 450px;
+    width: 350px;
+  }
+
+  .welcome-button {
+    font-size: 14px;
+    height: 45px;
+  }
+}

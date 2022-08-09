@@ -1,0 +1,11 @@
+.canvas-control-container {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.canvas-dropdown {
+  padding: 15px;
+}
