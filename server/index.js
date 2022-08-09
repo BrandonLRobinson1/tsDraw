@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const path = require("path");
 const cookieParser = require("cookie-parser");
 const verifyJWT = require("./middleware/verifyJWT");
 const loginVerify = require("./middleware/loginVerify");
@@ -58,14 +57,6 @@ app.get("/myDrawings", getMyDrawings);
 app.use("/deleteDrawing", deleteDrawing);
 
 app.get("/logout", logout);
-
-// app.get("/*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../client/public/index.html"), (err) => {
-//     if (err) {
-//       res.status(500).send(err);
-//     }
-//   });
-// });
 
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDB 🦊");
