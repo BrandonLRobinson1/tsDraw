@@ -1,7 +1,7 @@
 Getting Started
 ---------------
 
-1) Make sure you are on the branch - feature/talk-space-ticket-number.
+1) Make sure you are on the branch (if you're cloning from Github) - feature/talk-space-ticket-number.
 
 2) In the server folder, you will need to create a .env file. You are more than welcome to use the following credentials.
 

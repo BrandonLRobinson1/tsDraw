@@ -59,13 +59,13 @@ app.use("/deleteDrawing", deleteDrawing);
 
 app.get("/logout", logout);
 
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/public/index.html"), (err) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
-});
+// app.get("/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../client/public/index.html"), (err) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     }
+//   });
+// });
 
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDB 🦊");
