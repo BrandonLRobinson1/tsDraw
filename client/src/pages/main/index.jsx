@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import Card from './Card';
 import MainNav from '../navBar/MainNav';
 import Loading from '../common/Loading';
@@ -8,6 +9,7 @@ import { baseUrl } from '../../lib/static';
 import './index.css';
 
 const Main = () => {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [allDrawings, setAllDrawings] = useState([]);
   const [myDrawings, setMyDrawings] = useState([]);
@@ -20,6 +22,7 @@ const Main = () => {
       'Content-Type': 'application/JSON',
       authorization: `Bearer ${token}`,
     },
+    timeout: 4000,
   };
 
   const getMyDrawings = async () => {
@@ -31,9 +34,14 @@ const Main = () => {
       setMyDrawings(response.data);
     } catch (e) {
       const { response } = e;
+      setIsLoading(false);
 
       if (response.status === 500) {
         toast.error('Cannot reach server');
+      }
+      if (response.status === 403) {
+        toast.info('Please sign in.');
+        navigate('/');
       }
       toast.error(response.data.message);
     }
@@ -49,6 +57,7 @@ const Main = () => {
       setIsLoading(false);
     } catch (e) {
       const { response } = e;
+      setIsLoading(false);
 
       if (response.status === 500) {
         toast.error('Cannot reach server');
@@ -67,6 +76,7 @@ const Main = () => {
     } catch (e) {
       const { response } = e;
       setIsLoading(false);
+
       if (response.status === 500) {
         toast.error('Cannot reach server');
       }
