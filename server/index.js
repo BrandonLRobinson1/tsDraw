@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-// const path = require("path");
+const path = require("path");
 const cookieParser = require("cookie-parser");
 const verifyJWT = require("./middleware/verifyJWT");
 const register = require("./controllers/register");
@@ -42,28 +42,25 @@ app.use(express.json({ limit: "50mb" }));
 
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
-// app.use(express.static(path.join(__dirname, "../client", "build")));
-// app.use(express.static("public"));
+app.post("/register", register);
 
-app.use("/register", register);
-
-app.use("/login", login);
-
-// app.get("/", (req, res) => {
-//   res.send("Hello World!");
-// });
+app.post("/login", login);
 
 app.use(verifyJWT);
 
-app.use("/create", createNewDrawing);
+app.post("/create", createNewDrawing);
 
-app.use("/allDrawings", getAllDrawings);
+app.get("/allDrawings", getAllDrawings);
 
-app.use("/myDrawings", getMyDrawings);
+app.get("/myDrawings", getMyDrawings);
 
-app.use("/deleteDrawing", deleteDrawing);
+app.delete("/deleteDrawing", deleteDrawing);
 
-app.use("/logout", logout);
+app.get("/logout", logout);
+
+app.use(express.static(path.join(__dirname, "../client", "build")));
+
+app.use(express.static("public"));
 
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDB 🦊");

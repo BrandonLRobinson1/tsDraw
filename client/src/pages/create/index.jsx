@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Dropdown from '../common/Dropdown';
 import NavCreate from '../navBar/NavCreate';
-import axiosTokenConfig from '../../lib/static/axiosTokenConfig';
 import {
   colorsOptions, brushSize, viewTypes, baseUrl,
 } from '../../lib/static';
@@ -66,7 +65,6 @@ const Create = () => {
   };
 
   const eraser = () => {
-    // TODO: look
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     if (!eraserActive) {
@@ -104,6 +102,15 @@ const Create = () => {
     const minutes = Math.floor(millis / 60000);
     const seconds = ((millis % 60000) / 1000).toFixed(0);
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
+
+  const token = JSON.parse(localStorage.getItem('tsToken'));
+
+  const axiosTokenConfig = {
+    headers: {
+      'Content-Type': 'application/JSON',
+      authorization: `Bearer ${token}`,
+    },
   };
 
   const saveDrawing = async () => {

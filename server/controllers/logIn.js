@@ -32,12 +32,9 @@ const login = async (req, res) => {
 
     foundUser.refreshToken = refreshToken;
 
-    const result = await foundUser.save();
-
-    console.log(result);
+    await foundUser.save();
 
     res.cookie("jwt", refreshToken, {
-      // httpOnly: true,
       httpOnly: false,
       secure: true,
       sameSite: "None",

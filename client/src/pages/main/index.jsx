@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import Card from './Card';
 import MainNav from '../navBar/MainNav';
 import Loading from '../common/Loading';
-import axiosTokenConfig from '../../lib/static/axiosTokenConfig';
 import { baseUrl } from '../../lib/static';
 import './index.css';
 
@@ -14,6 +13,15 @@ const Main = () => {
   const [myDrawings, setMyDrawings] = useState([]);
   const [filterByGlobal, setFilterByGlobal] = useState(false);
 
+  const token = JSON.parse(localStorage.getItem('tsToken'));
+
+  const axiosTokenConfig = {
+    headers: {
+      'Content-Type': 'application/JSON',
+      authorization: `Bearer ${token}`,
+    },
+  };
+
   const getMyDrawings = async () => {
     try {
       const response = await axios.get(
@@ -21,7 +29,6 @@ const Main = () => {
         axiosTokenConfig,
       );
       setMyDrawings(response.data);
-      console.log('response.data my email', response.data);
     } catch (e) {
       const { response } = e;
 
@@ -53,7 +60,7 @@ const Main = () => {
   const deleteMyDrawing = async (id) => {
     try {
       setIsLoading(true);
-      await axios.post(`${baseUrl}/deleteDrawing`, { id }, axiosTokenConfig);
+      await axios.delete(`${baseUrl}/deleteDrawing`, { id }, axiosTokenConfig);
       toast.success('Drawing deleted');
       await getMyDrawings();
       await getAllDrawings();

@@ -48,8 +48,7 @@ const SignUp = () => {
         },
       };
 
-      const data = await axios.post(`${baseUrl}/register`, body, config);
-      console.log('data: ', data);
+      await axios.post(`${baseUrl}/register`, body, config);
 
       toast.success('Sign up complete!');
 

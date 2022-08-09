@@ -17,12 +17,10 @@ const register = async (req, res) => {
 
     const hashedPwd = await bcrypt.hash(password, 10);
 
-    const result = await User.create({
+    await User.create({
       email: email.toLowerCase(),
       password: hashedPwd,
     });
-
-    console.log(result);
 
     res.status(201).json({ success: `New user ${email} created!` });
   } catch (err) {

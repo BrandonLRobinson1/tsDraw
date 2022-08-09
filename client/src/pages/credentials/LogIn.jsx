@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -15,7 +15,6 @@ import './index.css';
 const LogIn = () => {
   const navigate = useNavigate();
   const { setIsAuthenticated } = useContext(AuthContext);
-  const [redirect, setRedirect] = useState(false);
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -31,10 +30,6 @@ const LogIn = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
-  useEffect(() => {
-    if (redirect) navigate('/main');
-  }, [redirect]);
 
   const logInSumbit = async (userCredentials) => {
     try {
@@ -61,7 +56,7 @@ const LogIn = () => {
 
       setIsAuthenticated(true);
 
-      setRedirect(true);
+      navigate('/main');
     } catch (e) {
       const { response } = e;
 
