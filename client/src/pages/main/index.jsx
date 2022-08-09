@@ -60,7 +60,7 @@ const Main = () => {
   const deleteMyDrawing = async (id) => {
     try {
       setIsLoading(true);
-      await axios.delete(`${baseUrl}/deleteDrawing`, { id }, axiosTokenConfig);
+      await axios.post(`${baseUrl}/deleteDrawing`, { id }, axiosTokenConfig);
       toast.success('Drawing deleted');
       await getMyDrawings();
       await getAllDrawings();

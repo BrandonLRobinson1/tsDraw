@@ -54,7 +54,7 @@ app.get("/allDrawings", getAllDrawings);
 
 app.get("/myDrawings", getMyDrawings);
 
-app.delete("/deleteDrawing", deleteDrawing);
+app.use("/deleteDrawing", deleteDrawing);
 
 app.get("/logout", logout);
 
