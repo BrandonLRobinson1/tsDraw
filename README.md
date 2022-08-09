@@ -1,15 +1,13 @@
 Getting Started
 ---------------
 
-1) Make sure you are on the branch (if you're cloning from Github) - feature/talk-space-ticket-number.
-
-2) In the server folder, you will need to create a .env file. You are more than welcome to use the following credentials.
+1) In the server folder, you will need to create a .env file. You are more than welcome to use the following credentials.
 
 PORT=3100ACCESS_TOKEN_SECRET=SECRETREFRESH_TOKEN_SECRET=ALSOSECRETDATABASE_URI=mongodb+srv://brandonlee:brandonlee@cluster0.xarnj5r.mongodb.net/?retryWrites=true&w=majority
 
-3) Inside of the client folder run - npm start
+2) Inside of the client folder run - npm start
 
-5) Inside of the server folder run npm run dev
+3) Inside of the server folder run npm run dev
 
 
 Architecture
