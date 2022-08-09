@@ -4,6 +4,7 @@ const cors = require("cors");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const verifyJWT = require("./middleware/verifyJWT");
+const loginVerify = require("./middleware/loginVerify");
 const register = require("./controllers/register");
 const login = require("./controllers/logIn");
 const logout = require("./controllers/logout");
@@ -42,7 +43,7 @@ app.use(express.json({ limit: "50mb" }));
 
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
-app.post("/register", register);
+app.post("/register", loginVerify, register);
 
 app.post("/login", login);
 
